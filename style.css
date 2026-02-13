@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital@1&display=swap');
+
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #1a1a1a, #0b0b0b);
+    color: #eaeaea;
+    overflow-x: hidden;
+}
+
+/* ===== PHOTO LAYER ===== */
+.bg-gallery {
+    position: fixed; /* full screen */
+    top:0; left:0; right:0; bottom:0;
+    z-index: 7; /* Increased to be above the card (z-index: 6) so photos can be hovered */
+    pointer-events: none; /* allow clicks on card */
+}
+
+.bg-photo {
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    border-radius: 16px;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(20%) brightness(0.7);
+    transition: transform 0.5s ease, filter 0.5s ease;
+    pointer-events: auto; /* allow hover */
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* Hover zoom */
+.bg-photo:hover {
+    transform: scale(1.6);
+    filter: grayscale(0%) brightness(1);
+    z-index: 10; /* above card */
+}
+
+/* Disable scaling on small screens to prevent overlap and button issues */
+@media (max-width: 768px) {
+    .bg-photo:hover {
+        transform: none;  /* Keeps brightness/filter, removes scale */
+    }
+}
+
+/* Photo positions */
+.p1 { top: 5%; left: 5%; transform: rotate(-8deg); }
+.p2 { top: 5%; right: 5%; transform: rotate(8deg); }
+.p3 { bottom: 10%; left: 10%; transform: rotate(-6deg); }
+.p4 { bottom: 10%; right: 10%; transform: rotate(6deg); }
+
+/* ===== CENTER CONTENT ===== */
+.center {
+    position: relative;
+    z-index: 5; /* above photos normally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.card {
+    position: relative;
+    z-index: 6;
+    max-width: 440px;
+    width: 100%;
+    padding: 45px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+/* Text styles */
+h1 { font-size: 32px; margin-top:0; font-weight:600; }
+h1 span { font-family:'Playfair Display', serif; font-style:italic; font-weight:400; }
+p { font-size: 15px; line-height:1.9; color:#cfcfcf; }
+
+/* ===== BUTTON ===== */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #6aa9ff, #9cc7ff);
+    color: #0b1a33;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(106,169,255,0.5);
+}
+
+.btn.secondary {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1px solid #6aa9ff;
+}
